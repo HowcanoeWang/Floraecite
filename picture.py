@@ -95,4 +95,7 @@ def main_example():
     print(data_iter, picture_name)
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
