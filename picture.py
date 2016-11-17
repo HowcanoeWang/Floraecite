@@ -93,9 +93,3 @@ def main_example():
     '''
     data_iter, picture_name = next(test_iter)
     print(data_iter, picture_name)
-
-
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
