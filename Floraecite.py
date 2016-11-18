@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os, random, xlrd
+import os, random, xlrd, webbrowser
 from tkinter import *
 from tkinter.messagebox import *
 from PIL import Image
@@ -34,15 +34,6 @@ def OpeningGUI(datadir):
     # print(DataBase['Num'][2])
     return DataBase, PicList
 
-#def next():
-    #flag=0
-    #def view_mode():
-    #def test_mode():
-
-    #if flag==0:
-
-    #else:
-
 def SelectMode():
     flag=var.get()
     if flag==0: #浏览模式
@@ -72,6 +63,12 @@ Text_CommonName = Label(root,text='Common name')
 Text_CommonName.config(bg='White',fg='Black',font=('Times', 40, 'normal'))
 Text_ScientificName = Label(root,text='Scientific name')
 Text_ScientificName.config(bg='White',fg='Black',font=('Times', 40, 'italic'))
+Text_Link = Label(root,text='https://github.com/HowcanoeWang/Floraecite' )
+Text_Link.config(bg='White',fg='Blue',font=('Times', 10, 'underline'),cursor='hand2')
+Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: Beta1.0.3' )
+Text_Author.config(bg='White',fg='Black',font=('Times', 10, 'normal'))
+def linkclick(event):
+    webbrowser.open_new(r"https://github.com/HowcanoeWang/Floraecite")
 Button_Help = Button(root,text='Help')
 Button_Help.config(bg='White',fg='Black',font=('Times', 30, 'normal'))
 Button_Next = Button(root,text='Next')
@@ -84,7 +81,10 @@ Entry_ScientificName.config(bg='White',fg='Black',font=('Times', 40, 'italic'),s
 
 Img.pack(side=LEFT,padx=20,pady=20)
 
-Text_ModeSelect.pack(side=TOP,padx=40,pady=50)
+Text_Link.pack(side=TOP)
+Text_Link.bind("<Button-1>", linkclick)
+Text_Author.pack(side=TOP)
+Text_ModeSelect.pack(side=TOP,padx=40,pady=20)
 var = IntVar(0)
 ModeSelectText=['Viewing mode','Testing mode']
 for i in range(2):
