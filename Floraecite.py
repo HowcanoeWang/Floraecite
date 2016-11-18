@@ -185,8 +185,8 @@ correctnum = 0
 help_flag = False
 (DataBase, PicList) = OpeningGUI(datadir)
 Len = len(PicList)
-if os.path.isfile('memeory.floracite'):  # 如果日志文件存在
-    f = open('memeory.floracite', 'r')
+if os.path.isfile('memeory.floraecite'):  # 如果日志文件存在
+    f = open('memeory.floraecite', 'r')
     MasterList = eval(f.read())
     if len(MasterList)<Len: # 缺少了图片
         for j in range(Len):
@@ -194,7 +194,7 @@ if os.path.isfile('memeory.floracite'):  # 如果日志文件存在
                 MasterList[PicList[j]] = 1
     f.close()
 else:
-    f = open( 'memeory.floracite', 'w')
+    f = open( 'memeory.floraecite', 'w')
     MasterList = {}
     for i in range(Len):
         MasterList[PicList[i]]=1
@@ -262,6 +262,6 @@ Button_Help.pack(side=LEFT,padx=100)
 Button_Next.pack(side=RIGHT,padx=100)
 
 root.mainloop()
-f = open( 'memeory.floracite', 'w')
+f = open( 'memeory.floraecite', 'w')
 f.write(str(MasterList))
 f.close()
