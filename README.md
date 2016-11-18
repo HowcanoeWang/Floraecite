@@ -29,4 +29,4 @@ PS:
 
 
 ## Debug
-If you meet any bug, please contact the author without hesitation. You could e-mail the author or make comments on Github. Discribe the problem and your operation process in detail.
+If you meet any bug, please contact the author without hesitation. You could e-mail the author or make comments on Github. Describe the problem and your operation process in detail.
