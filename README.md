@@ -1,5 +1,5 @@
 # Floræcite
-## How to using it
+## How to use it
 Downloading ‘floraecite.exe’ and ‘Data’ Folder at the same time. Put them together in the same folder.
 
 ## Notice
