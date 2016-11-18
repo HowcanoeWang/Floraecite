@@ -1,2 +1,2 @@
 # Floræcite
-The author is still studing python 3 now...
+Please download ‘floraecite.exe’ and ‘Data’ Folder at the same time
