@@ -7,7 +7,7 @@ The Data(000.xlsx and pictures) are examples provided by the course of Autecolog
 
 After opening the programme, it will create a log file called __memeory.flo please DO NOT delete it! It records your mastery of species.
 
-This programme could list your least familiar specises at the first begining due to your using process! 
+This programme could list your least familiar species at the first beginning due to your using process! 
 
 ## Make your own database
 1. The 000.xlsx is the most important file that you should not change the name of this file.
@@ -20,10 +20,11 @@ This programme could list your least familiar specises at the first begining due
 | 002 | Pteridium aquilinum | bracken fern | 1 |
 
 PS: 
-+ the first row should not be put into sheet(just tell you the meanin of each column), please start with your picture names in the first line directly.
-+ the picture names in the sheet must the same as picture names in the Data folder. 
++ 0 == Latin names don't need to recite, 1 == Latin Name required. If you just want to identify plants rather than remembering their Latin names, just put zeros in that column.
++ The first row should not be put into the sheet(just tell you the meaning of each column), please start with your picture names in the first line directly.
++ Picture names in the sheet must the same as picture names in the Data folder. 
 + Other languages which are included in UTF-8 format are supported.
-+ recommend picture format of .jpg
++ Recommend picture format of .jpg
 + Please make sure all the picture files in the same format.
 
 
