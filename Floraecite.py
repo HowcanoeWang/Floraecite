@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os, random, xlrd, webbrowser
+import os, sys, random, xlrd, webbrowser
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import askdirectory
@@ -102,7 +102,7 @@ def name_show(x):
             Entry_ScientificName.config(state='normal')
     return SciName,ComName,Latin
 
-def next():
+def Next_Page(event):
     global view_i, imgobj,picname, correctnum, help_flag, MasterList
     if view_i >= Len-1: # 如果超过了图片数
         showinfo('Congratulation!', 'All pictures have been viewed!')
@@ -181,31 +181,10 @@ def fresh_label(): # fresh the text in the correct display label 更新正确数
     Text_Infomation.config(text='Page: ' + str(view_i+1) + '/' + str(Len) + '\n Correct number:' + str(correctnum))
 
 def map_sort(dict): # Mastery rank method 熟练度排序算法
-    #from random import uniform
-    #from itertools import permutations
-    #s['end']= 999
     dicted = list(sorted(dict.items(), key=lambda e:e[1], reverse=False))
     res = []
-    for i in range(len(dicted)-1):
+    for i in range(len(dicted)):
         res.append(dicted[i][0])
-    #begin = 0
-    #now = dicted[0][1]
-    #for i,v in enumerate(dicted):
-    #    if v[1] != now:
-    #        if i-begin == 1:
-    #           res.append(v[0])
-    #            begin = i
-    #       else:
-    #            now = v[1]
-    #            temp = permutations(dicted[begin:i])
-    #            length = i-begin
-    #            if length > 3:
-    #                for i in range(int(uniform(length*(length-1),length*(length-1)*(length-2)))):
-    #                    temp.__next__()
-    #            else: temp.__next__()
-    #            for it in temp.__next__():
-    #                res.append(it[0])
-    #            begin = i
     return res
 
 #####################################################################
@@ -213,17 +192,35 @@ def map_sort(dict): # Mastery rank method 熟练度排序算法
 # Ask = askdirectory(title='Select a data folder')
 # datadir = Ask+'/'
 datadir = 'Data/'
+if os.path.exists(datadir[:-1]):
+    if not os.path.exists(datadir + '000.xlsx'):
+        showwarning('Error!', 'No found [000.xlsx] in the '+ datadir[:-1]+ 'folder')
+        sys.exit()
+else:
+    showwarning('Error!', 'No folder called [' + datadir[:-1] +  ']')
+    sys.exit()
 correctnum = 0
 help_flag = False
 (DataBase, __PicList__) = OpeningGUI(datadir)
+for i in range(len(__PicList__)):
+    if not __PicList__[i][:-4] in DataBase['Num']:
+        showwarning('Error!','No picture file names [' + __PicList__[i][:-4] + '] in the 000.xlsx')
+        sys.exit()
 Len = len(__PicList__)
 if os.path.isfile('memeory.floraecite'):  # 如果日志文件存在
     f = open('memeory.floraecite', 'r')
     MasterList = eval(f.read())
-    if len(MasterList)<Len: # 缺少了图片
+    if len(MasterList)<Len: # Data文件夹增加了图片
         for j in range(Len):
             if not __PicList__[j] in MasterList: # 如果不在字典里
                 MasterList[__PicList__[j]] = 1
+    if len(MasterList)>Len: # Data文件夹减少了图片
+        __PicListDel__ = map_sort(MasterList) # 获取masterlist中的图片名列表
+        print(__PicListDel__)
+        for j in range(len(MasterList)):
+            print(__PicListDel__[j])
+            if not __PicListDel__[j] in __PicList__: # 如果Master中的图片名列表 not in Data中的图片列表
+                del MasterList[__PicListDel__[j]]
     f.close()
 else:
     f = open( 'memeory.floraecite', 'w')
@@ -233,7 +230,6 @@ else:
     f.write(str(MasterList))
     f.close()
 view_i = 0
-
 PicList = map_sort(MasterList)
 # loading Image
 picname = PicList[0][:-4]
@@ -265,13 +261,13 @@ Text_ScientificName = Label(root,text='Scientific name')
 Text_ScientificName.config(bg='White',fg='Black',font=('Times', h*5, 'italic'))
 Text_Link = Label(root,text='https://github.com/HowcanoeWang/Floraecite' )
 Text_Link.config(bg='White',fg='Blue',font=('Times', h, 'underline'),cursor='hand2')
-Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: Beta 1.6.1')
+Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: Beta 1.6.3')
 Text_Author.config(bg='White',fg='Black',font=('Times', h, 'normal'))
 Text_Infomation = Label(root,text='Page: ' + str(view_i+1) + '/' + str(Len) + '\n Correct number:' + str(correctnum))
 Text_Infomation.config(bg='White',fg='Black',font=('Times', h*2, 'normal'))
 Button_Help = Button(root,text='Help',command=help)
 Button_Help.config(bg='White',fg='Black',font=('Times', h*4, 'normal'),state='disabled')
-Button_Next = Button(root,text='Next',command=next)
+Button_Next = Button(root,text='Next')
 Button_Next.config(bg='White',fg='Black',font=('Times', h*4, 'normal'))
 Entry_CommonName = Entry(root)
 Entry_CommonName.insert(0, ComName)
@@ -297,12 +293,15 @@ for i in range(2):
     rad.pack(side=TOP,expand=YES,fill=BOTH)
 Text_CommonName.pack(side=TOP,padx=w*4,pady=h*2,expand=YES,fill=BOTH)
 Entry_CommonName.pack(side=TOP,padx=w,pady=h,expand=YES,fill=BOTH)
+Entry_CommonName.bind('<Return>', Next_Page)
 Text_ScientificName.pack(side=TOP,padx=w*4,pady=h*4,expand=YES,fill=BOTH)
 Entry_ScientificName.pack(side=TOP,padx=w,pady=h,expand=YES,fill=BOTH)
+Entry_ScientificName.bind('<Return>', Next_Page)
 Text_Infomation.pack(side=TOP,expand=YES,fill=BOTH)
 
 Button_Help.pack(side=LEFT,padx=w*6,expand=YES,fill=BOTH)
 Button_Next.pack(side=RIGHT,padx=w*6,expand=YES,fill=BOTH)
+Button_Next.bind('<Button-1>', Next_Page)
 
 root.mainloop()
 ########################################################################
