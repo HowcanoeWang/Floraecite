@@ -32,11 +32,12 @@ def OpeningGUI(datadir): # 打开GUI时，读取xlsx的数据库和Data文件夹
     return DataBase, PicList
 
 def SelectMode():
-    global picname,view_i
+    global picname,view_i, correctnum
     flag=var.get()
     if flag==0: #浏览模式
         if askyesno('Verify', 'Do you really want to switch to viewing mode? This will reutrn to begining'):
             view_i = 0
+            correctnum = 0
             picname = PicList[0][:-4]
             imgdir = datadir + picname + pickind
             imgobj = image_load(imgdir)
@@ -137,6 +138,7 @@ def next():
                 if Latin==1: # 需要写拉丁名
                     if Input_SciName != SciName: # 拉丁名不正确
                         showerror(title="Error!", message="Scientific name is not correct! Check the spelling please!")
+                        Entry_ScientificName.insert(END, Input_SciName)
                     else: # 拉丁名填写正确
                         flag = True
                 else: # 不需要写拉丁名
@@ -162,7 +164,7 @@ def help():
     global help_flag
     picname = PicList[view_i][:-4]
     (SciName, ComName, Latin) = name_show(picname)
-    if askyesno('Notice:','R U sure asking for help?'):
+    if askyesno('Notice:','Are you sure asking for help?'):
         Input_ComName = Entry_CommonName.get()
         Input_SciName = Entry_ScientificName.get()
         help_flag = True
