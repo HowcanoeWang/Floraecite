@@ -102,7 +102,7 @@ def name_show(x):
             Entry_ScientificName.config(state='normal')
     return SciName,ComName,Latin
 
-def Next_Page(event):
+def Next_Page(event=None):
     global view_i, imgobj,picname, correctnum, help_flag, MasterList
     if view_i >= Len-1: # 如果超过了图片数
         showinfo('Congratulation!', 'All pictures have been viewed!')
@@ -261,13 +261,13 @@ Text_ScientificName = Label(root,text='Scientific name')
 Text_ScientificName.config(bg='White',fg='Black',font=('Times', h*5, 'italic'))
 Text_Link = Label(root,text='https://github.com/HowcanoeWang/Floraecite' )
 Text_Link.config(bg='White',fg='Blue',font=('Times', h, 'underline'),cursor='hand2')
-Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: Beta 1.6.3')
+Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: Beta 1.6.4')
 Text_Author.config(bg='White',fg='Black',font=('Times', h, 'normal'))
 Text_Infomation = Label(root,text='Page: ' + str(view_i+1) + '/' + str(Len) + '\n Correct number:' + str(correctnum))
 Text_Infomation.config(bg='White',fg='Black',font=('Times', h*2, 'normal'))
 Button_Help = Button(root,text='Help',command=help)
 Button_Help.config(bg='White',fg='Black',font=('Times', h*4, 'normal'),state='disabled')
-Button_Next = Button(root,text='Next')
+Button_Next = Button(root,text='Next',command=Next_Page)
 Button_Next.config(bg='White',fg='Black',font=('Times', h*4, 'normal'))
 Entry_CommonName = Entry(root)
 Entry_CommonName.insert(0, ComName)
@@ -301,7 +301,7 @@ Text_Infomation.pack(side=TOP,expand=YES,fill=BOTH)
 
 Button_Help.pack(side=LEFT,padx=w*6,expand=YES,fill=BOTH)
 Button_Next.pack(side=RIGHT,padx=w*6,expand=YES,fill=BOTH)
-Button_Next.bind('<Button-1>', Next_Page)
+# Button_Next.bind('<Button-1>', Next_Page)
 
 root.mainloop()
 ########################################################################
