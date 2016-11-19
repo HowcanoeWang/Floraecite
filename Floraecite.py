@@ -10,6 +10,7 @@ global view_i, imgobj, picname, MasterList, correctnum, help_flag
 root = Tk()
 root.title('Floræcite')
 root.config(bg='White')
+root.wm_state( 'zoomed' )
 
 def OpeningGUI(datadir): # 打开GUI时，读取xlsx的数据库和Data文件夹下所有的图片列表，并对图片列表进行逆序
     # Excel读取
@@ -22,32 +23,30 @@ def OpeningGUI(datadir): # 打开GUI时，读取xlsx的数据库和Data文件夹
     List_ComName = table.col_values(2)
     List_Latin = table.col_values(3)
     DataBase={'Num':List_Num,'SciName':List_SciName,'ComName':List_ComName,'Latin':List_Latin}
-
     # 图片列表获取与打乱
     imagefiles = os.listdir('Data/')
     PicList = imagefiles[1:]
     random.shuffle(PicList)
-    # print(PicList)
-    # print(DataBase['Num'][2])
     return DataBase, PicList
 
 def SelectMode():
     global picname,view_i, correctnum
     flag=var.get()
     if flag==0: #浏览模式
-        if askyesno('Verify', 'Do you really want to switch to viewing mode? This will reutrn to begining'):
-            view_i = 0
-            correctnum = 0
-            picname = PicList[0][:-4]
-            imgdir = datadir + picname + pickind
-            imgobj = image_load(imgdir)
-            Img.config(image=imgobj)
-            name_show(picname)
-            Entry_CommonName.config(state='disabled')
-            Entry_ScientificName.config(state='disabled')
-            fresh_label()
-        else:
-            var.set(1)
+        if Entry_CommonName.cget('state') == 'normal':
+            if askyesno('Verify', 'Do you really want to switch to viewing mode? This will reutrn to begining'):
+                view_i = 0
+                correctnum = 0
+                picname = PicList[0][:-4]
+                imgdir = datadir + picname + pickind
+                imgobj = image_load(imgdir)
+                Img.config(image=imgobj)
+                name_show(picname)
+                Entry_CommonName.config(state='disabled')
+                Entry_ScientificName.config(state='disabled')
+                fresh_label()
+            else:
+                var.set(1)
     else: # 测试模式
         Entry_CommonName.config(state='normal')
         Entry_ScientificName.config(state='normal')
@@ -57,9 +56,11 @@ def SelectMode():
 
 def image_load(imgdir):
     global imgobj
+    w = root.winfo_screenwidth()
+    h = root.winfo_screenheight()
     testimgobj = Image.open(imgdir)
     #testimgobj.thumbnail((600,800), Image.ANTIALIAS)
-    testimgobj = testimgobj.resize((600,800), Image.ANTIALIAS)
+    testimgobj = testimgobj.resize((int(w/2.5),int(h-100)), Image.ANTIALIAS)
     imgobj = PhotoImage(testimgobj)
     return imgobj
 
@@ -175,40 +176,70 @@ def help():
             Entry_ScientificName.delete('0', END)
             Entry_ScientificName.insert(END,SciName)
 
-def fresh_label():
+def fresh_label(): # fresh the text in the correct display label 更新正确数量的显示标签
     global view_i, correctnum
     Text_Infomation.config(text='Page: ' + str(view_i+1) + '/' + str(Len) + '\n Correct number:' + str(correctnum))
+
+def map_sort(dict): # Mastery rank method 熟练度排序算法
+    #from random import uniform
+    #from itertools import permutations
+    #s['end']= 999
+    dicted = list(sorted(dict.items(), key=lambda e:e[1], reverse=False))
+    res = []
+    for i in range(len(dicted)-1):
+        res.append(dicted[i][0])
+    #begin = 0
+    #now = dicted[0][1]
+    #for i,v in enumerate(dicted):
+    #    if v[1] != now:
+    #        if i-begin == 1:
+    #           res.append(v[0])
+    #            begin = i
+    #       else:
+    #            now = v[1]
+    #            temp = permutations(dicted[begin:i])
+    #            length = i-begin
+    #            if length > 3:
+    #                for i in range(int(uniform(length*(length-1),length*(length-1)*(length-2)))):
+    #                    temp.__next__()
+    #            else: temp.__next__()
+    #            for it in temp.__next__():
+    #                res.append(it[0])
+    #            begin = i
+    return res
+
 #####################################################################
-# opening GUI
+'''opening GUI'''
 # Ask = askdirectory(title='Select a data folder')
 # datadir = Ask+'/'
 datadir = 'Data/'
 correctnum = 0
 help_flag = False
-(DataBase, PicList) = OpeningGUI(datadir)
-Len = len(PicList)
+(DataBase, __PicList__) = OpeningGUI(datadir)
+Len = len(__PicList__)
 if os.path.isfile('memeory.floraecite'):  # 如果日志文件存在
     f = open('memeory.floraecite', 'r')
     MasterList = eval(f.read())
     if len(MasterList)<Len: # 缺少了图片
         for j in range(Len):
-            if not PicList[j] in MasterList: # 如果不在字典里
-                MasterList[PicList[j]] = 1
+            if not __PicList__[j] in MasterList: # 如果不在字典里
+                MasterList[__PicList__[j]] = 1
     f.close()
 else:
     f = open( 'memeory.floraecite', 'w')
     MasterList = {}
     for i in range(Len):
-        MasterList[PicList[i]]=1
+        MasterList[__PicList__[i]]=1
     f.write(str(MasterList))
     f.close()
 view_i = 0
+
+PicList = map_sort(MasterList)
 # loading Image
 picname = PicList[0][:-4]
 pickind = PicList[0][-4:]
 imgdir=datadir + picname + pickind
 imgobj = image_load(imgdir)
-Img = Label(root, image=imgobj)
 # loading names
 num = DataBase['Num'].index(picname)
 Latin = DataBase['Latin'][num]
@@ -219,51 +250,63 @@ else: #需要拉丁名
     SciName = DataBase['SciName'][num]
 #####################################################################
 
+#####################################################################
+'''New Controls'''
+w = int(root.winfo_screenwidth()/100)
+h = int(root.winfo_screenheight()/100)
+
+Img = Label(root, image=imgobj)
+Img.config(bg='White')
 Text_ModeSelect = Label(root,text='Mode select:')
-Text_ModeSelect.config(bg='White',fg='Black',font=('Times', 30, 'normal'))
+Text_ModeSelect.config(bg='White',fg='Black',font=('Times', h*3, 'normal'))
 Text_CommonName = Label(root,text='Common name')
-Text_CommonName.config(bg='White',fg='Black',font=('Times', 40, 'normal'))
+Text_CommonName.config(bg='White',fg='Black',font=('Times', h*5, 'normal'))
 Text_ScientificName = Label(root,text='Scientific name')
-Text_ScientificName.config(bg='White',fg='Black',font=('Times', 40, 'italic'))
+Text_ScientificName.config(bg='White',fg='Black',font=('Times', h*5, 'italic'))
 Text_Link = Label(root,text='https://github.com/HowcanoeWang/Floraecite' )
-Text_Link.config(bg='White',fg='Blue',font=('Times', 10, 'underline'),cursor='hand2')
-Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: Beta 1.5.0' )
-Text_Author.config(bg='White',fg='Black',font=('Times', 10, 'normal'))
+Text_Link.config(bg='White',fg='Blue',font=('Times', h, 'underline'),cursor='hand2')
+Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: Beta 1.6.1')
+Text_Author.config(bg='White',fg='Black',font=('Times', h, 'normal'))
 Text_Infomation = Label(root,text='Page: ' + str(view_i+1) + '/' + str(Len) + '\n Correct number:' + str(correctnum))
-Text_Infomation.config(bg='White',fg='Black',font=('Times', 20, 'normal'))
+Text_Infomation.config(bg='White',fg='Black',font=('Times', h*2, 'normal'))
 Button_Help = Button(root,text='Help',command=help)
-Button_Help.config(bg='White',fg='Black',font=('Times', 30, 'normal'),state='disabled')
+Button_Help.config(bg='White',fg='Black',font=('Times', h*4, 'normal'),state='disabled')
 Button_Next = Button(root,text='Next',command=next)
-Button_Next.config(bg='White',fg='Black',font=('Times', 30, 'normal'))
+Button_Next.config(bg='White',fg='Black',font=('Times', h*4, 'normal'))
 Entry_CommonName = Entry(root)
 Entry_CommonName.insert(0, ComName)
-Entry_CommonName.config(bg='White',fg='Black',font=('Times', 40, 'normal'),state='disabled')
+Entry_CommonName.config(bg='White',fg='Black',font=('Times', h*5, 'normal'),state='disabled')
 Entry_ScientificName = Entry(root)
 Entry_ScientificName.insert(0, SciName)
-Entry_ScientificName.config(bg='White',fg='Black',font=('Times', 40, 'italic'),state='disabled')
+Entry_ScientificName.config(bg='White',fg='Black',font=('Times', h*5, 'italic'),state='disabled')
+######################################################################
 
-Img.pack(side=LEFT,padx=20,pady=20)
+######################################################################
+'''Putting controls'''
+Img.pack(side=LEFT,padx=w,pady=w,expand=YES,fill=BOTH)
 
-Text_Link.pack(side=TOP)
+Text_Link.pack(side=TOP,expand=YES,fill=BOTH)
 Text_Link.bind("<Button-1>", linkclick)
-Text_Author.pack(side=TOP)
-Text_ModeSelect.pack(side=TOP,padx=40,pady=20)
+Text_Author.pack(side=TOP,expand=YES,fill=BOTH)
+Text_ModeSelect.pack(side=TOP,expand=YES,padx=w*3,pady=h*2,fill=BOTH)
 var = IntVar(0)
 ModeSelectText=['Viewing mode','Testing mode']
 for i in range(2):
     rad = Radiobutton(root,text=ModeSelectText[i],value=i,variable=var,command=SelectMode)
-    rad.config(bg='White', fg='Black', font=('Times', 20, 'normal'))
-    rad.pack(side=TOP)
-Text_CommonName.pack(side=TOP,padx=60,pady=20)
-Entry_CommonName.pack(side=TOP,pady=10)
-Text_ScientificName.pack(side=TOP,padx=60,pady=30)
-Entry_ScientificName.pack(side=TOP,pady=10)
-Text_Infomation.pack(side=TOP)
+    rad.config(bg='White', fg='Black', font=('Times', h*2, 'normal'))
+    rad.pack(side=TOP,expand=YES,fill=BOTH)
+Text_CommonName.pack(side=TOP,padx=w*4,pady=h*2,expand=YES,fill=BOTH)
+Entry_CommonName.pack(side=TOP,padx=w,pady=h,expand=YES,fill=BOTH)
+Text_ScientificName.pack(side=TOP,padx=w*4,pady=h*4,expand=YES,fill=BOTH)
+Entry_ScientificName.pack(side=TOP,padx=w,pady=h,expand=YES,fill=BOTH)
+Text_Infomation.pack(side=TOP,expand=YES,fill=BOTH)
 
-Button_Help.pack(side=LEFT,padx=100)
-Button_Next.pack(side=RIGHT,padx=100)
+Button_Help.pack(side=LEFT,padx=w*6,expand=YES,fill=BOTH)
+Button_Next.pack(side=RIGHT,padx=w*6,expand=YES,fill=BOTH)
 
 root.mainloop()
+########################################################################
+'''Save log files when exit'''
 f = open( 'memeory.floraecite', 'w')
 f.write(str(MasterList))
 f.close()
