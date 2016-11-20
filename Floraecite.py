@@ -1,16 +1,25 @@
 # -*- coding: utf-8 -*-
-import os, sys, random, xlrd, webbrowser
+# packing code
+# pyinstaller -i D:\OneDrive\Program\Python\Floraecite\floraecite.ico -F -w D:\OneDrive\Program\Python\Floraecite\Floraecite.py
+import os, sys, random, xlrd, webbrowser,base64
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import askdirectory
 from PIL import Image
 from PIL.ImageTk import PhotoImage
+from icon import img
 
 global view_i, imgobj, picname, MasterList, correctnum, help_flag
 root = Tk()
 root.title('Floræcite')
 root.config(bg='White')
 root.wm_state( 'zoomed' )
+tmp = open("tmp.png","wb+")
+tmp.write(base64.b64decode(img))
+tmp.close()
+icon = PhotoImage(file='tmp.png')
+root.tk.call('wm', 'iconphoto', root._w, icon)
+os.remove("tmp.png")
 
 def OpeningGUI(datadir): # 打开GUI时，读取xlsx的数据库和Data文件夹下所有的图片列表，并对图片列表进行逆序
     # Excel读取
@@ -261,7 +270,7 @@ Text_ScientificName = Label(root,text='Scientific name')
 Text_ScientificName.config(bg='White',fg='Black',font=('Times', h*5, 'italic'))
 Text_Link = Label(root,text='https://github.com/HowcanoeWang/Floraecite' )
 Text_Link.config(bg='White',fg='Blue',font=('Times', h, 'underline'),cursor='hand2')
-Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: Beta 1.6.4')
+Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: Beta 1.6.5')
 Text_Author.config(bg='White',fg='Black',font=('Times', h, 'normal'))
 Text_Infomation = Label(root,text='Page: ' + str(view_i+1) + '/' + str(Len) + '\n Correct number:' + str(correctnum))
 Text_Infomation.config(bg='White',fg='Black',font=('Times', h*2, 'normal'))
