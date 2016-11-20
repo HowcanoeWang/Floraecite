@@ -157,6 +157,8 @@ def Next_Page(event=None):
                 if not help_flag: # 如果没有求助且做对了，则熟练度+1
                     correctnum += 1
                     MasterList[PicList[view_i]] += 1
+                    if Button_Help.cget('state')=='disabled': # 不但做对了，而且一次通关，熟练度再加0.5
+                        MasterList[PicList[view_i]] += 0.5
                 view_i += 1
                 picname = PicList[view_i][:-4]
                 pickind = PicList[view_i][-4:]
@@ -270,7 +272,7 @@ Text_ScientificName = Label(root,text='Scientific name')
 Text_ScientificName.config(bg='White',fg='Black',font=('Times', h*5, 'italic'))
 Text_Link = Label(root,text='https://github.com/HowcanoeWang/Floraecite' )
 Text_Link.config(bg='White',fg='Blue',font=('Times', h, 'underline'),cursor='hand2')
-Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: Beta 1.6.5')
+Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: Beta 1.6.6')
 Text_Author.config(bg='White',fg='Black',font=('Times', h, 'normal'))
 Text_Infomation = Label(root,text='Page: ' + str(view_i+1) + '/' + str(Len) + '\n Correct number:' + str(correctnum))
 Text_Infomation.config(bg='White',fg='Black',font=('Times', h*2, 'normal'))
