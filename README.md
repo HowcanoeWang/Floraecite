@@ -2,7 +2,7 @@
 ## How to use it
 Download the download.zip
 
-Extract ‘floraecite.zip’ and ‘Data’ in that zip file. Put them together in the same folder.
+Extract ‘floraecite.exe’ and ‘Data’ in that zip file. Put them together in the same folder.
 
 ## Notice
 The Data(000.xlsx and pictures) are examples provided by the course of Autecology(FOR2425), College of Foresty and Geology，University of New Brunswick
