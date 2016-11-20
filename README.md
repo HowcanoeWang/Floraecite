@@ -1,6 +1,7 @@
 # Floræcite
 ## How to use it
 Download the download.zip
+
 Extract ‘floraecite.exe’ and ‘Data’ in that zip file. Put them together in the same folder.
 
 ## Notice
