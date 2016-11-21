@@ -1,11 +1,11 @@
- # Floræcite
+# Floræcite
 ## How to use it
 Download the download folder
 
-Make sure *floraecite.exe* and *Data* together in *the same folder*.
+Make sure **floraecite.exe** and **Data** together in **the same folder**.
 
 ## Notice
-The Data(000.xlsx and pictures) are examples provided by the course of >Autecology(FOR2425), College of Foresty and Geology，University of New Brunswick
+The Data(000.xlsx and pictures) are examples provided by the course of > Autecology(FOR2425), College of Foresty and Geology，University of New Brunswick
 
 After opening the programme, it will create a log file called memeory.floraecite please DO NOT delete it! It records your mastery of species.
 
