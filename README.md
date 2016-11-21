@@ -46,37 +46,37 @@ If you meet any bug, please contact the author without hesitation. You could e-m
 
 ### 16.11.20
 #### Beta1.6.6
-Improve mastary calculation
++ Improve mastary calculation
 #### Beta1.6.5
-Add icon
++ Add icon
 #### Beta1.6.4
-Fix Next button can not rebound
++ Fix Next button can not rebound
 
 ### 16.11.19
 #### Beta1.6.3
-Add 
-+ Checking before operating the program 
+##### Add
++ Checking before operating the program
 + \<Enter> to 'next' instead Of clicking Button 
-Debug 
+##### Debug 
 + Fix user delete pictures in the folder that caused program broken up
 #### Beta1.6.1
-New: 
+##### New: 
 + Activate Mastary rank methods 
-Debug: 
+##### Debug: 
 + Fix small screen can not show the GUI 
 + Fix log file read error 
 #### Beta1.5.0
-main functions, including veiwing and testing mode, help, and Mastery recording
++ main functions, including veiwing and testing mode, help, and Mastery recording
 
 ### 16.11.18
 + Add version auther and official url link
 + Add single select button, excel data reading, picture list acquire
 
 ### 16.11.17
-coding
++ coding
 
 ### 16.11.15
-github use learning
++ github use learning
 
 ### 16.11.14
-Program starts
++ Program started
