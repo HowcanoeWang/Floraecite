@@ -1,15 +1,15 @@
-# Floræcite
+ # Floræcite
 ## How to use it
-Download the download.zip
+Download the download folder
 
-Extract ‘floraecite.exe’ and ‘Data’ in that zip file. Put them together in the same folder.
+Make sure @floraecite.exe@ and @Data@ together in the @same@ folder.
 
 ## Notice
 The Data(000.xlsx and pictures) are examples provided by the course of Autecology(FOR2425), College of Foresty and Geology，University of New Brunswick
 
 After opening the programme, it will create a log file called memeory.floraecite please DO NOT delete it! It records your mastery of species.
 
-This programme could list your least familiar species at the first beginning due to your using process! 
+This programme could list your least familiar species at the first beginning due to your using process!
 
 ## Make your own database
 1. The 000.xlsx is the most important file that you should not change the name of this file.
@@ -26,7 +26,7 @@ PS:
 + The first row should not be put into the sheet(just tell you the meaning of each column), please start with your picture names in the first line directly.
 + Picture names in the sheet must the same as picture names in the Data folder. 
 + Other languages which are included in UTF-8 format are supported.
-+ Recommend picture format of .jpg
++ Recommend picture format of .jpg, support format of .png and .gif
 + Please make sure all the picture files in the same format.
 
 
