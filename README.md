@@ -1,8 +1,8 @@
 # Floræcite
 ## How to use it
-Download the download folder
+Download the download folder by clicking ***clone or download*** button, select ***download the ZIP***
 
-Make sure **floraecite.exe** and **Data** together in **the same folder**.
+**Extract** the zip file, go into the "download(Beta...)" folder, double click floraecite.exe.
 
 ## Notice
 The Data(000.xlsx and pictures) are examples provided by the course of ***Autecology(FOR2425), College of Foresty and Geology，University of New Brunswick***
