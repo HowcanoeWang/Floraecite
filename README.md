@@ -1,6 +1,6 @@
 # Floræcite
 ## How to use it
-Download the download folder by clicking ***clone or download*** button, select ***download the ZIP***
+Download by clicking ***clone or download*** button, select ***download the ZIP***
 
 **Extract** the zip file, go into the "download(Beta...)" folder, double click floraecite.exe.
 
