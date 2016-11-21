@@ -25,6 +25,7 @@ PS:
 + 0 == Latin names don't need to recite, 1 == Latin Name required. If you just want to identify plants rather than remembering their Latin names, just put zeros in that column.
 + The first row should **NOT** be put into the sheet(just tell you the meaning of each column), please start with your picture names in the first line directly.
 + Picture names in the sheet **must the same as** picture names in the Data folder. 
+
 + Other languages which are included in UTF-8 format are supported.
 + Recommend picture format of **.jpg**, support format of **.png** and **.gif**
 + **Please make sure all the picture files in the same format.**
@@ -47,8 +48,10 @@ If you meet any bug, please contact the author without hesitation. You could e-m
 ### 16.11.20
 #### Beta1.6.6
 + Improve mastary calculation
+
 #### Beta1.6.5
 + Add icon
+
 #### Beta1.6.4
 + Fix Next button can not rebound
 
@@ -56,15 +59,20 @@ If you meet any bug, please contact the author without hesitation. You could e-m
 #### Beta1.6.3
 ##### Add
 + Checking before operating the program
-+ \<Enter> to 'next' instead Of clicking Button 
++ \<Enter> to 'next' instead Of clicking Button    
+
 ##### Debug 
-+ Fix user delete pictures in the folder that caused program broken up
++ Fix user delete pictures in the folder that caused program broken up    
+
 #### Beta1.6.1
+
 ##### New: 
 + Activate Mastary rank methods 
+
 ##### Debug: 
 + Fix small screen can not show the GUI 
 + Fix log file read error 
+
 #### Beta1.5.0
 + main functions, including veiwing and testing mode, help, and Mastery recording
 
