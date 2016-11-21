@@ -32,3 +32,51 @@ PS:
 
 ## Debug
 If you meet any bug, please contact the author without hesitation. You could e-mail the author or make comments on Github. Describe the problem and your operation process in detail.
+
+--- 
+
+## Update log
+### 16.11.21
++ Add 13 Lichens and Bryophytes pictures
++ Moderate 000.xlsx
++ change file positions
+#### Beta 1.6.7    
+1. fix picture list bugs
+2. change folder structure
+
+### 16.11.20
+#### Beta1.6.6
+Improve mastary calculation
+#### Beta1.6.5
+Add icon
+#### Beta1.6.4
+Fix Next button can not rebound
+
+### 16.11.19
+#### Beta1.6.3
+Add 
++ Checking before operating the program 
++ \<Enter> to 'next' instead Of clicking Button 
+Debug 
++ Fix user delete pictures in the folder that caused program broken up
+#### Beta1.6.1
+New: 
++ Activate Mastary rank methods 
+Debug: 
++ Fix small screen can not show the GUI 
++ Fix log file read error 
+#### Beta1.5.0
+main functions, including veiwing and testing mode, help, and Mastery recording
+
+### 16.11.18
++ Add version auther and official url link
++ Add single select button, excel data reading, picture list acquire
+
+### 16.11.17
+coding
+
+### 16.11.15
+github use learning
+
+### 16.11.14
+Program starts
