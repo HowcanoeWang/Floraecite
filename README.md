@@ -2,12 +2,12 @@
 ## How to use it
 Download by clicking ***clone or download*** button, select ***download the ZIP***
 
-**Extract** the zip file, go into the "download(Beta...)" folder, double click floraecite.exe.
+**Extract** the zip file, go into the "download(Beta...)" folder, double click floraecite.exe,then will come a dateselection dialog, select **Data** folder. 
 
 ## Notice
 The Data(000.xlsx and pictures) are examples provided by the course of ***Autecology(FOR2425), College of Foresty and Geology，University of New Brunswick***
 
-After opening the programme, it will create a log file called memeory.floraecite please **DO NOT** delete it! It records your mastery of species.
+After opening the programme, it will create a log file called memeory.floraecite in the picture data folder, please **DO NOT** delete it! It records your mastery of species.
 
 This programme could list your least familiar species at the first beginning due to your using process!
 
@@ -37,6 +37,10 @@ If you meet any bug, please contact the author without hesitation. You could e-m
 --- 
 
 ## Update log
+### 16.11.22
+#### Beta1.6.8
++ add picture data choose function
++ display Mastery in the GUI
 ### 16.11.21
 + Add 13 Lichens and Bryophytes pictures
 + Moderate 000.xlsx
