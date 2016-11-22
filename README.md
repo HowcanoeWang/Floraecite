@@ -2,7 +2,7 @@
 ## How to use it
 Download by clicking ***clone or download*** button, select ***download the ZIP***
 
-**Extract** the zip file, go into the "download(Beta...)" folder, double click floraecite.exe,then will come a dateselection dialog, select **Data** folder. 
+**Extract** the zip file, go into the **"setup"** folder, double click **floraecite.exe**, then in the folder-selection-dialog, select **Data** folder. 
 
 ## Notice
 The Data(000.xlsx and pictures) are examples provided by the course of ***Autecology(FOR2425), College of Foresty and Geology，University of New Brunswick***
