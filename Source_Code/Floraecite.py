@@ -8,6 +8,7 @@ from tkinter.filedialog import askdirectory
 from PIL import Image
 from PIL.ImageTk import PhotoImage
 from icon import img
+import urllib.request
 
 global view_i, imgobj, picname, MasterList, correctnum, help_flag
 root = Tk()
@@ -79,7 +80,7 @@ def image_load(imgdir):
     imgobj = PhotoImage(testimgobj)
     return imgobj
 
-def linkclick(event):
+def linkclick(event=None):
     webbrowser.open_new(r"https://github.com/HowcanoeWang/Floraecite")
 
 def name_show(x):
@@ -168,7 +169,7 @@ def Next_Page(event=None):
             view_i += 1
             if view_i > Len-1: # If come to the last picture
                 showinfo('Congratulation!', 'All pictures have been tested!')
-                view_i += 0
+                view_i = 0
             picname = PicList[view_i][:-4]
             pickind = PicList[view_i][-4:]
             imgdir = datadir + picname + pickind
@@ -207,8 +208,31 @@ def map_sort(dict): # Mastery rank method 熟练度排序算法
         res.append(dicted[i][0])
     return res
 
+def NewVersionDetect():
+    flag = False
+    try:
+        r = urllib.request.urlopen('https://github.com/HowcanoeWang/Floraecite/tree/master/Source_Code')
+        html = str(r.read())
+        VersionIndex=html.find('Latest_version_')
+        if VersionIndex>=0:
+            EndIndex = html.find('.txt')
+            WebVersionNum=html[VersionIndex+15:EndIndex]
+            if WebVersionNum != VersionNum:
+                flag = True
+        else:
+            flag = False
+    except(urllib.error.URLError):
+        flag=False
+        print('network failed')
+    return flag
 #####################################################################
 '''opening GUI'''
+VersionNum='Beta1.6.9'
+if NewVersionDetect():
+    answer=askokcancel(title='Update Notes',message='New version detected, update now?')
+    if answer:
+        linkclick()
+        sys.exit()
 Ask = askdirectory(title='Select a picture data folder',initialdir=os.getcwd())
 print(Ask)
 if Ask != '':
@@ -233,17 +257,28 @@ Len = len(__PicList__)
 if os.path.isfile(datadir + 'memeory.floraecite'):  # if log file exist # 如果日志文件存在
     f = open(datadir + 'memeory.floraecite', 'r')
     MasterList = eval(f.read())
-    if len(MasterList)<Len: # If user add pictures in the data folder # Data文件夹增加了图片
-        for j in range(Len):
-            if not __PicList__[j] in MasterList: # if the add picture not in the log dictionary # 如果不在字典里
-                MasterList[__PicList__[j]] = 0
-    if len(MasterList)>Len: # If user delete pictures in the data folder # DataData文件夹减少了图片
-        __PicListDel__ = map_sort(MasterList) # 获取masterlist中的图片名列表
-        print(__PicListDel__)
-        for j in range(len(MasterList)):
-            print(__PicListDel__[j])
-            if not __PicListDel__[j] in __PicList__: # 如果Master中的图片名列表 not in Data中的图片列表
-                del MasterList[__PicListDel__[j]]
+    #if len(MasterList)<Len: # If user add pictures in the data folder # Data文件夹增加了图片
+    #    for j in range(Len):
+    #        if not __PicList__[j] in MasterList: # if the add picture not in the log dictionary # 如果不在字典里
+    #            MasterList[__PicList__[j]] = 0
+    #if len(MasterList)>Len: # If user delete pictures in the data folder # DataData文件夹减少了图片
+    #    __PicListDel__ = map_sort(MasterList) # 获取masterlist中的图片名列表
+    #    print(__PicListDel__)
+    #    for j in range(len(MasterList)):
+    #        print(__PicListDel__[j])
+    #        if not __PicListDel__[j] in __PicList__: # 如果Master中的图片名列表 not in Data中的图片列表
+    #            del MasterList[__PicListDel__[j]]
+    if map_sort(MasterList) != __PicList__:
+        __PicListLog__ = map_sort(MasterList)
+        __AddedPic__=list(set(__PicList__)-set(__PicListLog__)) # 在文件夹中但是不在log文件中的
+        __MissedPic__ =list( set(__PicListLog__) - set(__PicList__))  # 在log中但是不在文件夹中的文件
+        print(__MissedPic__)
+        print(__AddedPic__)
+        for m in range(len(__MissedPic__)):
+            del MasterList[__MissedPic__[m]]
+        for a in range(len(__AddedPic__)):
+            MasterList[__AddedPic__[a]] = 0
+        print('replaced')
     f.close()
 else:
     f = open(datadir +  'memeory.floraecite', 'w')
@@ -284,7 +319,7 @@ Text_ScientificName = Label(root,text='Scientific name')
 Text_ScientificName.config(bg='White',fg='Black',font=('Times', h*5, 'italic'))
 Text_Link = Label(root,text='https://github.com/HowcanoeWang/Floraecite' )
 Text_Link.config(bg='White',fg='Blue',font=('Times', h, 'underline'),cursor='hand2')
-Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: Beta 1.6.8')
+Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: '+ VersionNum)
 Text_Author.config(bg='White',fg='Black',font=('Times', h, 'normal'))
 Text_Infomation = Label(root,text='Page: ' + str(view_i+1) + '/' + str(Len) + '  Mastery: ' + str(MasterList[PicList[view_i]]) + '\n Correct number:' + str(correctnum))
 Text_Infomation.config(bg='White',fg='Black',font=('Times', h*2, 'normal'))
