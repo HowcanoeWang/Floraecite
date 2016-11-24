@@ -1,8 +1,10 @@
 # Floræcite
 ## How to use it
-Download by clicking ***clone or download*** button, select ***download the ZIP***
+Download by clicking ***Launch.zip*** button, select ***download***
 
-**Extract** the zip file, go into the **"setup"** folder, double click **floraecite.exe**, then in the folder-selection-dialog, select **Data** folder. 
+**Extract** the zip file, double click **floraecite.exe**, then in the folder-selection-dialog, select **Data** folder. 
+
+There is only 6 example pictures in the **Data** Folder. For UNB students who enrolled in the FOR/ENR2425, go to the **UNB extra pictures**, download all the zip files, move all the pictures to **fore Data** folder
 
 ## Notice
 The Data(000.xlsx and pictures) are examples provided by the course of ***Autecology(FOR2425), College of Foresty and Geology，University of New Brunswick***
@@ -37,6 +39,12 @@ If you meet any bug, please contact the author without hesitation. You could e-m
 --- 
 
 ## Update log
+### 16.11.23
+#### Beta1.6.9
++ pack pictures into zip files
++ add new version detection function
++ fix rename picture can not change log bug
+
 ### 16.11.22
 #### Beta1.6.8
 + add picture data choose function
