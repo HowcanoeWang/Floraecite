@@ -18,6 +18,7 @@ This programme could list your least familiar species at the first beginning due
 2. This program could only read sheet1 in the Excel. Please do not add information to other sheets.
 3. The data structure of 000.xlsx is:
 
+
 | (Picture filename) | (Latin name) | (Common name) | (Latin required) |
 |------------------|------------|-------------|----------------|
 | 001 | Polystichum acrostichoides | Christmas fern | 0 |
@@ -39,6 +40,10 @@ If you meet any bug, please contact the author without hesitation. You could e-m
 --- 
 
 ## Update log
+### 16.11.27
+#### Beta1.7.1
++ add new version download wait string
+
 ### 16.11.26
 #### Beta1.7.0
 + fix small bugs
