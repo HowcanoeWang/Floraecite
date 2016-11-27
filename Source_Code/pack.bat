@@ -1,0 +1,1 @@
+cd D:/pythonexe && pyinstaller -i D:\OneDrive\Program\Python\Floraecite\Source_code\floraecite.ico -F -w D:\OneDrive\Program\Python\Floraecite\Source_code\Floraecite.py

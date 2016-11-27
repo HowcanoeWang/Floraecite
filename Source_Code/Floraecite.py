@@ -227,7 +227,7 @@ def NewVersionDetect():
     return flag
 #####################################################################
 '''opening GUI'''
-VersionNum='Beta1.6.9'
+VersionNum='Beta1.7.0'
 if NewVersionDetect():
     answer=askokcancel(title='Update Notes',message='New version detected, update now?')
     if answer:
@@ -284,7 +284,7 @@ else:
     f = open(datadir +  'memeory.floraecite', 'w')
     MasterList = {}
     for i in range(Len):
-        MasterList[__PicList__[i]]=1
+        MasterList[__PicList__[i]]=0
     f.write(str(MasterList))
     f.close()
 view_i = 0
