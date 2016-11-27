@@ -39,6 +39,11 @@ If you meet any bug, please contact the author without hesitation. You could e-m
 --- 
 
 ## Update log
+### 16.11.26
+#### Beta1.7.0
++ fix small bugs
++ change names in 000.xlsx file from ’ to '
+
 ### 16.11.23
 #### Beta1.6.9
 + pack pictures into zip files
