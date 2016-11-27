@@ -10,6 +10,7 @@ from PIL.ImageTk import PhotoImage
 from icon import img
 import urllib.request
 
+
 global view_i, imgobj, picname, MasterList, correctnum, help_flag
 root = Tk()
 root.title('Floræcite')
@@ -216,6 +217,7 @@ def NewVersionDetect():
         VersionIndex=html.find('Latest_version_')
         if VersionIndex>=0:
             EndIndex = html.find('.txt')
+            global WebVersionNum
             WebVersionNum=html[VersionIndex+15:EndIndex]
             if WebVersionNum != VersionNum:
                 flag = True
@@ -225,14 +227,34 @@ def NewVersionDetect():
         flag=False
         print('network failed')
     return flag
+
+def download_exe():
+    def reporthook(count, block_size, total_size):
+        percent = int(count * block_size * 100 / total_size)
+        percent_str="已下载%d%%, %.1f / %.1f MB"%(percent,(count*block_size)/(1024**2),total_size/(1024**2))
+        root.title(percent_str)
+    global WebVersionNum
+    download_URL = 'https://github.com/HowcanoeWang/Floraecite/raw/master/Source_Code/Floraecite(' + WebVersionNum + ').exe'
+    download_exename = 'Floraecite(' + WebVersionNum + ').exe'
+    urllib.request.urlretrieve(download_URL, download_exename, reporthook)
+    showinfo('Done', 'New version has been downloaded!')
+    sys.exit()
 #####################################################################
 '''opening GUI'''
-VersionNum='Beta1.7.0'
+VersionNum='Beta1.7.1'
 if NewVersionDetect():
     answer=askokcancel(title='Update Notes',message='New version detected, update now?')
-    if answer:
-        linkclick()
-        sys.exit()
+    if answer: # if user click download
+        # foo_thread = threading.Thread(target=download_exe)
+        # foo_thread.start()
+        # from tkinter import ttk
+        # win = Toplevel(root)
+        # ProgressBar = ttk.Progressbar(win, orient="horizontal", length=200, mode="determinate")
+        # ProgressBar["value"] = 0
+        # ProgressBar["maximum"] = 100
+        #ProgressBar.pack(expand=YES, fill=BOTH)
+        download_exe()
+        # win.mainloop()
 Ask = askdirectory(title='Select a picture data folder',initialdir=os.getcwd())
 print(Ask)
 if Ask != '':
@@ -257,17 +279,6 @@ Len = len(__PicList__)
 if os.path.isfile(datadir + 'memeory.floraecite'):  # if log file exist # 如果日志文件存在
     f = open(datadir + 'memeory.floraecite', 'r')
     MasterList = eval(f.read())
-    #if len(MasterList)<Len: # If user add pictures in the data folder # Data文件夹增加了图片
-    #    for j in range(Len):
-    #        if not __PicList__[j] in MasterList: # if the add picture not in the log dictionary # 如果不在字典里
-    #            MasterList[__PicList__[j]] = 0
-    #if len(MasterList)>Len: # If user delete pictures in the data folder # DataData文件夹减少了图片
-    #    __PicListDel__ = map_sort(MasterList) # 获取masterlist中的图片名列表
-    #    print(__PicListDel__)
-    #    for j in range(len(MasterList)):
-    #        print(__PicListDel__[j])
-    #        if not __PicListDel__[j] in __PicList__: # 如果Master中的图片名列表 not in Data中的图片列表
-    #            del MasterList[__PicListDel__[j]]
     if map_sort(MasterList) != __PicList__:
         __PicListLog__ = map_sort(MasterList)
         __AddedPic__=list(set(__PicList__)-set(__PicListLog__)) # 在文件夹中但是不在log文件中的
