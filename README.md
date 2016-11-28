@@ -1,6 +1,6 @@
 # Floræcite
 ## How to use it
-Download by clicking ***release***, or click this url: https://github.com/HowcanoeWang/Floraecite/releases
+**Download** by clicking **release**, or this url: https://github.com/HowcanoeWang/Floraecite/releases
 
 After downloading,**Extract** the zip file, double click **floraecite.exe**, then in the folder-selection-dialog, select **Data** folder. 
 
