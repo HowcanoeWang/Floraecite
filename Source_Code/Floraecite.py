@@ -120,7 +120,7 @@ def name_show(x):
     return SciName,ComName,Latin
 
 def Next_Page(event=None):
-    global view_i, imgobj,picname, correctnum, help_flag, MasterList
+    global view_i, imgobj,picname, correctnum, help_flag, ComName_flag, MasterList
     print(view_i)
     if var.get() == 0:  # viewing mode
         if view_i >= Len-1: # exceed picture number
@@ -148,7 +148,7 @@ def Next_Page(event=None):
         Input_ComName = Entry_CommonName.get()
         Input_SciName = Entry_ScientificName.get()
         (SciName,ComName,Latin)=name_show(picname)
-        flag =False
+        flag = False
         if Input_ComName != ComName: # if common name incorrect 如果输入的common name不正确
             showerror(title="Error!",message="Common name is not correct! Check the spelling please!")
         else: # 如果输入的common name正确  if common name correct
@@ -157,6 +157,8 @@ def Next_Page(event=None):
                 if Input_SciName != SciName: # if Latin name incorrect 拉丁名不正确
                     showerror(title="Error!", message="Scientific name is not correct! Check the spelling please!")
                     Entry_ScientificName.insert(END, Input_SciName)
+                    if Button_Help.cget('state') == 'disabled':  # Common name correct @ 1st time
+                        ComName_flag = True
                 else: # 拉丁名填写正确 if Latin name correct
                     flag = True
             else: # 不需要写拉丁名 if Latin name not required
@@ -165,8 +167,10 @@ def Next_Page(event=None):
             if not help_flag: # if not help and correct, Mastery +1 如果没有求助且做对了，则熟练度+1
                 correctnum += 1
                 MasterList[PicList[view_i]] += 1
-                if Button_Help.cget('state')=='disabled': # if correct in the first time Mastery +0.5 again 不但做对了，而且一次通关，熟练度再加0.5
-                    MasterList[PicList[view_i]] += 0.5
+                if Button_Help.cget('state')=='disabled': # if correct in the first time Mastery +0.2 again 不但做对了，而且一次通关，熟练度再加0.2
+                    MasterList[PicList[view_i]] += 0.2
+                elif ComName_flag: # Common name correct @ 1st time BUT scientific name not right
+                    MasterList[PicList[view_i]] += 0.1
             view_i += 1
             if view_i > Len-1: # If come to the last picture
                 showinfo('Congratulation!', 'All pictures have been tested!')
@@ -180,6 +184,7 @@ def Next_Page(event=None):
             Button_Help.config(state='disabled')
             fresh_label()
             help_flag = False
+            ComName_flag = False
         else:
             Button_Help.config(state='normal')
 
@@ -241,7 +246,7 @@ def download_exe():
     sys.exit()
 #####################################################################
 '''opening GUI'''
-VersionNum='Beta1.7.1'
+VersionNum='Beta1.7.2'
 if NewVersionDetect():
     answer=askokcancel(title='Update Notes',message='New version detected, update now?')
     if answer: # if user click download
@@ -270,6 +275,7 @@ else:
     sys.exit()
 correctnum = 0
 help_flag = False
+ComName_flag = False
 (DataBase, __PicList__) = OpeningGUI(datadir)
 for i in range(len(__PicList__)):
     if not __PicList__[i][:-4] in DataBase['Num']:
