@@ -42,7 +42,6 @@ def OpeningGUI(datadir): # 打开GUI时，读取xlsx的数据库和Data文件夹
         if string.find('jpg')==-1 and string.find('png')==-1 and string.find('gif')==-1:
             imagefiles.remove(string)
     PicList = imagefiles
-    print(PicList)
     random.shuffle(PicList)
     return DataBase, PicList
 
@@ -233,10 +232,26 @@ def NewVersionDetect():
         print('network failed')
     return flag
 
+def NewPictureDectect():
+    try:
+        r = urllib.request.urlopen('https://github.com/HowcanoeWang/Floraecite/tree/master/Source_Code')
+        html = str(r.read())
+        PictureIndex=html.find('UNBPicNum_')
+        if PictureIndex>=0:
+            EndIndex = html.find('.num')
+            global WebVersionNum
+            WebPictureNum=html[PictureIndex+10:EndIndex]
+            if int(WebPictureNum) > len(__PicList__):
+                answer=askokcancel('New pictures','New pictures have been released, download?')
+                if answer:
+                    webbrowser.open_new(r"https://github.com/HowcanoeWang/Floraecite/releases")
+    except(urllib.error.URLError):
+        print('network failed')
+
 def download_exe():
     def reporthook(count, block_size, total_size):
         percent = int(count * block_size * 100 / total_size)
-        percent_str="已下载%d%%, %.1f / %.1f MB"%(percent,(count*block_size)/(1024**2),total_size/(1024**2))
+        percent_str="Download %d%%, %.1f / %.1f MB"%(percent,(count*block_size)/(1024**2),total_size/(1024**2))
         root.title(percent_str)
     global WebVersionNum
     download_URL = 'https://github.com/HowcanoeWang/Floraecite/raw/master/Source_Code/Floraecite(' + WebVersionNum + ').exe'
@@ -244,9 +259,10 @@ def download_exe():
     urllib.request.urlretrieve(download_URL, download_exename, reporthook)
     showinfo('Done', 'New version has been downloaded!')
     sys.exit()
+
 #####################################################################
 '''opening GUI'''
-VersionNum='Beta1.7.2'
+VersionNum='v1.0'
 if NewVersionDetect():
     answer=askokcancel(title='Update Notes',message='New version detected, update now?')
     if answer: # if user click download
@@ -261,7 +277,6 @@ if NewVersionDetect():
         download_exe()
         # win.mainloop()
 Ask = askdirectory(title='Select a picture data folder',initialdir=os.getcwd())
-print(Ask)
 if Ask != '':
     datadir = Ask+'/'
 else:
@@ -277,6 +292,7 @@ correctnum = 0
 help_flag = False
 ComName_flag = False
 (DataBase, __PicList__) = OpeningGUI(datadir)
+NewPictureDectect()
 for i in range(len(__PicList__)):
     if not __PicList__[i][:-4] in DataBase['Num']:
         showwarning('Error!','No picture file names [' + __PicList__[i][:-4] + '] in the 000.xlsx')
@@ -289,13 +305,10 @@ if os.path.isfile(datadir + 'memeory.floraecite'):  # if log file exist # 如果
         __PicListLog__ = map_sort(MasterList)
         __AddedPic__=list(set(__PicList__)-set(__PicListLog__)) # 在文件夹中但是不在log文件中的
         __MissedPic__ =list( set(__PicListLog__) - set(__PicList__))  # 在log中但是不在文件夹中的文件
-        print(__MissedPic__)
-        print(__AddedPic__)
         for m in range(len(__MissedPic__)):
             del MasterList[__MissedPic__[m]]
         for a in range(len(__AddedPic__)):
             MasterList[__AddedPic__[a]] = 0
-        print('replaced')
     f.close()
 else:
     f = open(datadir +  'memeory.floraecite', 'w')
