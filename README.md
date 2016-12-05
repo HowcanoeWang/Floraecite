@@ -13,8 +13,11 @@ Download Floraecite_x86 version instead of Floraecite_x64 version
 ### The program can’t start because MSVCR100.dll is missing from your computer
 
 What hides behind this name is the Microsoft Visual C++ Redistributable which can easily be downloaded on the Microsoft website as x86 or x64 edition:
+
 32bit：http://www.microsoft.com/download/en/details.aspx?id=5555
+
 64bit：http://www.microsoft.com/download/en/details.aspx?id=14632
+
 Usually the application that misses the dll indicates what version you need - if one does not work, simply install the other.
 
 ### The program can't start because api-ms-win-crt-runtime-l1-1.0.dll is missing from your computer. Try reinstalling the program to fix this problem
@@ -25,12 +28,14 @@ Check for updates and install all pending updates, then restart the computer.
 After the restart repeat the steps above again until no more updates are available.
 
 **2.Download the Visual C++ Redistributable 2015**
+
 32bit:http://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x86.exe
+
 64bit:http://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x64.exe
 
 **3.Run the vcredist_x64.exe (64-bit) or vcredist_x86.exe (32-bit) and select ** ***Uninstall if already installed***
 
-**4.restart the computer and run the Floraecite again.
+**4.restart the computer and run the Floraecite again.**
 
 ### Debug
 If you meet any other bug, please contact the author without hesitation. You could e-mail the author or make comments on Github. Describe the problem and your operation process in detail.
