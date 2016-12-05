@@ -8,7 +8,7 @@ There is only a few example pictures in the **Launch.zip** Folder. For UNB stude
 ## If Error
 ### "This verison of this file is not compatible with the version of Windows you're running. Check your computer's system information to see whether you need an x86 (32-bit) or x64 (64-bit) verion of the program.
 
-Download Floraecite_x86 version instead of Floraecite_x64 version
+Download version newer than v1.0.1
 
 ### The program can’t start because MSVCR100.dll is missing from your computer
 
