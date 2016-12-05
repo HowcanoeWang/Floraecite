@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # packing code
 # pyinstaller -i D:\OneDrive\Program\Python\Floraecite\Source_code\floraecite.ico -F -w D:\OneDrive\Program\Python\Floraecite\Source_code\Floraecite.py
-import os, sys, random, xlrd, webbrowser,base64
+import os, sys, random, xlrd, webbrowser,base64, platform
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter.filedialog import askdirectory
@@ -254,15 +254,18 @@ def download_exe():
         percent_str="Download %d%%, %.1f / %.1f MB"%(percent,(count*block_size)/(1024**2),total_size/(1024**2))
         root.title(percent_str)
     global WebVersionNum
-    download_URL = 'https://github.com/HowcanoeWang/Floraecite/raw/master/Source_Code/Floraecite(' + WebVersionNum + ').exe'
+    download_URL = 'https://github.com/HowcanoeWang/Floraecite/releases/download/' + WebVersionNum + '/Floraecite('+ WebVersionNum +').exe'
     download_exename = 'Floraecite(' + WebVersionNum + ').exe'
-    urllib.request.urlretrieve(download_URL, download_exename, reporthook)
-    showinfo('Done', 'New version has been downloaded!')
+    try:
+        urllib.request.urlretrieve(download_URL, download_exename, reporthook)
+        showinfo('Done', 'New version has been downloaded!')
+    except(urllib.error.HTTPError):
+        webbrowser.open_new(r"https://github.com/HowcanoeWang/Floraecite/releases")
     sys.exit()
 
 #####################################################################
 '''opening GUI'''
-VersionNum='v1.0'
+VersionNum='v1.0.1'
 if NewVersionDetect():
     answer=askokcancel(title='Update Notes',message='New version detected, update now?')
     if answer: # if user click download
