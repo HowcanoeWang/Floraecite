@@ -1,0 +1,1 @@
+cd C:\Users\Python3\Documents\Pythonexe && pyinstaller -i C:\Users\Python3\Documents\GitHub\Floraecite\Source_code\floraecite.ico -F -w C:\Users\Python3\Documents\GitHub\Floraecite\Source_code\Floraecite.py
