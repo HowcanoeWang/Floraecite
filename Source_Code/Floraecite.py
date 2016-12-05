@@ -254,8 +254,8 @@ def download_exe():
         percent_str="Download %d%%, %.1f / %.1f MB"%(percent,(count*block_size)/(1024**2),total_size/(1024**2))
         root.title(percent_str)
     global WebVersionNum
-    download_URL = 'https://github.com/HowcanoeWang/Floraecite/releases/download/' + WebVersionNum + '/Floraecite('+ WebVersionNum +').exe'
-    download_exename = 'Floraecite(' + WebVersionNum + ').exe'
+    download_URL = 'https://github.com/HowcanoeWang/Floraecite/releases/download/' + WebVersionNum + '/Floraecite_'+ WebVersionNum +'.exe'
+    download_exename = 'Floraecite_' + WebVersionNum + '.exe'
     try:
         urllib.request.urlretrieve(download_URL, download_exename, reporthook)
         showinfo('Done', 'New version has been downloaded!')
