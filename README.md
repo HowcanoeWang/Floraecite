@@ -5,12 +5,16 @@
 After downloading,**Extract** the zip file, double click **floraecite.exe**, then in the folder-selection-dialog, select **Data** folder. 
 
 There is only a few example pictures in the **Launch.zip** Folder. For UNB students who enrolled in the FOR/ENR2425, go to the **UNB extra pictures**, download all the Picture-zip files
+
 ## If Error
-### "This verison of this file is not compatible with the version of Windows you're running. Check your computer's system information to see whether you need an x86 (32-bit) or x64 (64-bit) verion of the program.
 
-Download version newer than v1.0.1
+### 1° This verison of this file is not compatible with the version of Windows you're running. Check your computer's system information to see whether you need an x86 (32-bit) or x64 (64-bit) verion of the program.
+【此文件的版本与正在运行的WINDOWS版本不兼容，请检查计算机的系统信息以了解需要X86位（32位）还是X64】
 
-### The program can’t start because MSVCR100.dll is missing from your computer
+Download Floraecite version that newer than v1.0.1
+
+### 2° The program can’t start because MSVCR100.dll is missing from your computer
+【无法启动此程序，因为计算机中丢失MSVCR100.dll。尝试重新安装该程序以解决此问题】
 
 What hides behind this name is the Microsoft Visual C++ Redistributable which can easily be downloaded on the Microsoft website as x86 or x64 edition:
 
@@ -20,7 +24,8 @@ What hides behind this name is the Microsoft Visual C++ Redistributable which ca
 
 Usually the application that misses the dll indicates what version you need - if one does not work, simply install the other.
 
-### The program can't start because api-ms-win-crt-runtime-l1-1.0.dll is missing from your computer. Try reinstalling the program to fix this problem
+### 3° The program can't start because api-ms-win-crt-runtime-l1-1.0.dll is missing from your computer. Try reinstalling the program to fix this problem
+【无法启动此程序，因为计算机中丢失api-ms-win-crt-runtime-|1-1-0.dll尝试重新安装该程序以解决此问题】
 
 **1.Install all pending Windows Updates**
 Go to Start – Control Panel – Windows Update
@@ -28,6 +33,10 @@ Check for updates and install all pending updates, then restart the computer.
 After the restart repeat the steps above again until no more updates are available.
 
 **2.Download the Visual C++ Redistributable 2015**
+
+*!!! Visual C++ Redistributable 2008 and 2010 are needed for installing the 2015 if your computer doesn't have*
+
+*!!! After downloading, please DO NOT just double click to run, RIGHT click and using administrator rights to run*
 
 32bit:http://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x86.exe
 
