@@ -165,11 +165,12 @@ def Next_Page(event=None):
         if flag:
             if not help_flag: # if not help and correct, Mastery +1 如果没有求助且做对了，则熟练度+1
                 correctnum += 1
-                MasterList[PicList[view_i]] += 1
+                MasterList[PicList[view_i]]=round(MasterList[PicList[view_i]],1)
+                MasterList[PicList[view_i]] += round(1,1)
                 if Button_Help.cget('state')=='disabled': # if correct in the first time Mastery +0.2 again 不但做对了，而且一次通关，熟练度再加0.2
-                    MasterList[PicList[view_i]] += 0.2
+                    MasterList[PicList[view_i]] += round(0.2,1)
                 elif ComName_flag: # Common name correct @ 1st time BUT scientific name not right
-                    MasterList[PicList[view_i]] += 0.1
+                    MasterList[PicList[view_i]] += round(0.1,1)
             view_i += 1
             if view_i > Len-1: # If come to the last picture
                 showinfo('Congratulation!', 'All pictures have been tested!')
@@ -204,7 +205,7 @@ def help():
 
 def fresh_label(): # fresh the text in the correct display label 更新正确数量的显示标签
     global view_i, correctnum
-    Text_Infomation.config(text='Page: ' + str(view_i+1) + '/' + str(Len) +  '  Mastery: ' + str(MasterList[PicList[view_i]]) + '\n Correct number:' + str(correctnum))
+    Text_Infomation.config(text='Page: ' + str(view_i+1) + '/' + str(Len) +  '  Mastery: ' + str(round(MasterList[PicList[view_i]],1)) + '\n Correct number:' + str(correctnum))
 
 def map_sort(dict): # Mastery rank method 熟练度排序算法
     dicted = list(sorted(dict.items(), key=lambda e:e[1], reverse=False))
@@ -311,13 +312,13 @@ if os.path.isfile(datadir + 'memeory.floraecite'):  # if log file exist # 如果
         for m in range(len(__MissedPic__)):
             del MasterList[__MissedPic__[m]]
         for a in range(len(__AddedPic__)):
-            MasterList[__AddedPic__[a]] = 0
+            MasterList[__AddedPic__[a]] = 0.0
     f.close()
 else:
     f = open(datadir +  'memeory.floraecite', 'w')
     MasterList = {}
     for i in range(Len):
-        MasterList[__PicList__[i]]=0
+        MasterList[__PicList__[i]]=0.0
     f.write(str(MasterList))
     f.close()
 view_i = 0
@@ -354,7 +355,7 @@ Text_Link = Label(root,text='https://github.com/HowcanoeWang/Floraecite' )
 Text_Link.config(bg='White',fg='Blue',font=('Times', h, 'underline'),cursor='hand2')
 Text_Author = Label(root,text='Author: WANG Hao-Zhou \n Version: '+ VersionNum)
 Text_Author.config(bg='White',fg='Black',font=('Times', h, 'normal'))
-Text_Infomation = Label(root,text='Page: ' + str(view_i+1) + '/' + str(Len) + '  Mastery: ' + str(MasterList[PicList[view_i]]) + '\n Correct number:' + str(correctnum))
+Text_Infomation = Label(root,text='Page: ' + str(view_i+1) + '/' + str(Len) + '  Mastery: ' + str(round(MasterList[PicList[view_i]],1)) + '\n Correct number:' + str(correctnum))
 Text_Infomation.config(bg='White',fg='Black',font=('Times', h*2, 'normal'))
 Button_Help = Button(root,text='Help',command=help)
 Button_Help.config(bg='White',fg='Black',font=('Times', h*4, 'normal'),state='disabled')
