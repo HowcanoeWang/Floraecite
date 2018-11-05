@@ -1,80 +1,101 @@
 # Floræcite
+Species Memory Assistance (Flora + recite)：species identification and correcting the common names and Latin names spelling.
+![gui](images/gui.png)
 ## How to use it
+
+### 1. Preparation
 **Download** by clicking **release**, or this url: https://github.com/HowcanoeWang/Floraecite/releases
 
-After downloading,**Extract** the zip file, double click **floraecite.exe**, then in the folder-selection-dialog, select **Data** folder. 
+Download the <a href="https://github.com/HowcanoeWang/Floraecite/releases/download/v1.0.1/Floraecite_v1.0.1.exe">Floraecite_v1.0.1.exe</a> and <a href="https://github.com/HowcanoeWang/Floraecite/releases/download/v1.0.1/Data4Example.zip">Data4Example.zip</a>
 
-There is only a few example pictures in the **Launch.zip** Folder. For UNB students who enrolled in the FOR/ENR2425, go to the **UNB extra pictures**, download all the Picture-zip files
 
-## If Error
+#### 1.1 Use course provided database
+There is only a few example pictures in the **Data4Example.zip** Folder. For all FOR/ENR2425 courses image data, click here: <a href="https://github.com/HowcanoeWang/Floraecite/releases/download/v1.0/UNB2425Pictures161204.zip">**UNB extra pictures**</a> (200 Common species in Eastern North America)
 
-### 1° This verison of this file is not compatible with the version of Windows you're running. Check your computer's system information to see whether you need an x86 (32-bit) or x64 (64-bit) verion of the program.
-【此文件的版本与正在运行的WINDOWS版本不兼容，请检查计算机的系统信息以了解需要X86位（32位）还是X64】
+> The Extra Image Data (000.xlsx and 200 pictures) are examples provided by the course of ***Autecology(FOR2425), College of Foresty and Geology，University of New Brunswick***
 
-Download Floraecite version that newer than v1.0.1
+#### 1.2 Make your own database
+* The 000.xlsx is the default indexing file that you should not change the name (`000.xlsx`) of this file.
+* This program could only read sheet1 in the Excel. Please do not add information to other sheets.
+* The data structure of 000.xlsx is:
 
-### 2° The program can’t start because MSVCR100.dll is missing from your computer
-【无法启动此程序，因为计算机中丢失MSVCR100.dll。尝试重新安装该程序以解决此问题】
+    | (Picture filename) | (Latin name) | (Common name) | (Latin required) |
+    |------------------|------------|-------------|----------------|
+    | 001 | Polystichum acrostichoides | Christmas fern | 0 |
+    | 002 | Pteridium aquilinum | bracken fern | 1 |
 
-What hides behind this name is the Microsoft Visual C++ Redistributable which can easily be downloaded on the Microsoft website as x86 or x64 edition:
+    Where: 
+    
+    0 == Latin names don't need to recite, 1 == Latin Name required.   
+    If you just want to identify plants rather than remembering their Latin names, just put zeros in that column.
+    
+    The first row should **NOT** be put into the sheet(just tell you the meaning of each column), please start with your picture names in the first line directly. Here is the example:
+    ![xlsx example](images/xlsx.png)
+    
+    Picture names in the sheet (Column A) **must the same as** picture names in the Data folder. 
+    
+    Other languages which are included in UTF-8 format are supported.
+    
+    Recommend picture format of **.jpg**, support format of **.png** and **.gif**
+    
+    **Please make sure all the picture files in the same format.**
 
-32bit：http://www.microsoft.com/download/en/details.aspx?id=5555
+### 2. Common Using
+> After opening the programme, it will create a log file called memeory.floraecite in the picture data folder, this ensure the programme could list your least familiar species at the first beginning with your using process. Please **DO NOT** delete it!
 
-64bit：http://www.microsoft.com/download/en/details.aspx?id=14632
+#### 2.1 Viewing mode (Default)
+Click next to view the species pictures and their names
+![view](images/view.gif)
 
-Usually the application that misses the dll indicates what version you need - if one does not work, simply install the other.
+#### 2.2 Testing mode
+Click `Testing mode` to switch to this mode, all the name will change to blank for typing.
+Click `Next` to submit current answer, it will tell you correct or not. If correct, go to next species, if not, the `Help` button will enabled to give correct answer
+![view](images/test.gif)
 
-### 3° The program can't start because api-ms-win-crt-runtime-l1-1.0.dll is missing from your computer. Try reinstalling the program to fix this problem
-【无法启动此程序，因为计算机中丢失api-ms-win-crt-runtime-|1-1-0.dll尝试重新安装该程序以解决此问题】
 
-**1.Install all pending Windows Updates**
-Go to Start – Control Panel – Windows Update
-Check for updates and install all pending updates, then restart the computer.
-After the restart repeat the steps above again until no more updates are available.
+## Troubleshoot
+1. OS Version conflict  
+    * **[Error]**   
+        This verison of this file is not compatible with the version of Windows you're running. Check your computer's system information to see whether you need an x86 (32-bit) or x64 (64-bit) verion of the program.  
+        【此文件的版本与正在运行的WINDOWS版本不兼容，请检查计算机的系统信息以了解需要X86位（32位）还是X64】
+    * **[Fix]**  
+        Download Floraecite version that newer than v1.0.1  
+1. DLL missing
+    * **[Error1]**  
+        The program can’t start because MSVCR100.dll is missing from your computer  
+        【无法启动此程序，因为计算机中丢失MSVCR100.dll。尝试重新安装该程序以解决此问题】
+    * **[Fix]**  
+        What hides behind this name is the Microsoft Visual C++ Redistributable which can easily be downloaded on the Microsoft website as x86 or x64 edition:
 
-**2.Download the Visual C++ Redistributable 2015**
+        32bit：http://www.microsoft.com/download/en/details.aspx?id=5555
 
-*!!! Visual C++ Redistributable 2008 and 2010 are needed for installing the 2015 if your computer doesn't have*
+        64bit：http://www.microsoft.com/download/en/details.aspx?id=14632
 
-*!!! After downloading, please DO NOT just double click to run, RIGHT click and using administrator rights to run*
+        Usually the application that misses the dll indicates what version you need - if one does not work, simply install the other.
+    * **[Error2]**  
+        The program can't start because api-ms-win-crt-runtime-l1-1.0.dll is missing from your computer. Try reinstalling the program to fix this problem  
+        【无法启动此程序，因为计算机中丢失api-ms-win-crt-runtime-|1-1-0.dll尝试重新安装该程序以解决此问题】
+    * **[Fix]**  
+        1. Install all pending Windows Updates
+            Go to Start – Control Panel – Windows Update
+            Check for updates and install all pending updates, then restart the computer.
+            After the restart repeat the steps above again until no more updates are available.
+        
+        2. Download the Visual C++ Redistributable 2015
+            *Visual C++ Redistributable 2008 and 2010 are needed for installing the 2015 if your computer doesn't have*
+            
+            *After downloading, please DO NOT just double click to run, RIGHT click and using administrator rights to run*
+            
+            32bit: http://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x86.exe
+            
+            64bit: http://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x64.exe
+        
+        3. Run the vcredist_x64.exe (64-bit) or vcredist_x86.exe (32-bit) and select ***Uninstall if already installed***
+        
+        4. Restart the computer and run the Floraecite again.
 
-32bit:http://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x86.exe
-
-64bit:http://download.microsoft.com/download/9/3/F/93FCF1E7-E6A4-478B-96E7-D4B285925B00/vc_redist.x64.exe
-
-**3.Run the vcredist_x64.exe (64-bit) or vcredist_x86.exe (32-bit) and select ** ***Uninstall if already installed***
-
-**4.restart the computer and run the Floraecite again.**
-
-### Debug
+### Help Us
 If you meet any other bug, please contact the author without hesitation. You could e-mail the author or make comments on Github. Describe the problem and your operation process in detail.
-
-## Notice
-The Data(000.xlsx and pictures) are examples provided by the course of ***Autecology(FOR2425), College of Foresty and Geology，University of New Brunswick***
-
-After opening the programme, it will create a log file called memeory.floraecite in the picture data folder, please **DO NOT** delete it! It records your mastery of species.
-
-This programme could list your least familiar species at the first beginning due to your using process!
-
-## Make your own database
-1. The 000.xlsx is the most important file that you should not change the name of this file.
-2. This program could only read sheet1 in the Excel. Please do not add information to other sheets.
-3. The data structure of 000.xlsx is:
-
-
-| (Picture filename) | (Latin name) | (Common name) | (Latin required) |
-|------------------|------------|-------------|----------------|
-| 001 | Polystichum acrostichoides | Christmas fern | 0 |
-| 002 | Pteridium aquilinum | bracken fern | 1 |
-
-PS: 
-+ 0 == Latin names don't need to recite, 1 == Latin Name required. If you just want to identify plants rather than remembering their Latin names, just put zeros in that column.
-+ The first row should **NOT** be put into the sheet(just tell you the meaning of each column), please start with your picture names in the first line directly.
-+ Picture names in the sheet **must the same as** picture names in the Data folder. 
-
-+ Other languages which are included in UTF-8 format are supported.
-+ Recommend picture format of **.jpg**, support format of **.png** and **.gif**
-+ **Please make sure all the picture files in the same format.**
 
 --- 
 
